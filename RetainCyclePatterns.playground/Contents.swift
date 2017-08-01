@@ -28,13 +28,13 @@ class Departure: NSObject {
     }
 }
 
-var bob: Person? = Person(name: "Bob")
+var terry: Person? = Person(name: "Terry")
 var kyotoTown: Departure? = Departure(address: "kyoto road")
 
-bob?.departure = kyotoTown
-kyotoTown?.resident = bob
+terry?.departure = kyotoTown
+kyotoTown?.resident = terry
 
-bob = nil
+terry = nil
 kyotoTown = nil
 
 
@@ -107,10 +107,46 @@ people = nil
 
 
 
+//  unowned 
+
+class Customer {
+    let name: String
+    var creditCard: CreditCard?
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    deinit {
+        print("Custom name: \(name) was deinitialized")
+    }
+}
+
+class CreditCard {
+    let number: Int64
+    unowned let owner: Customer
+    
+    init(number: Int64, owner: Customer) {
+        self.number = number
+        self.owner = owner
+    }
+    deinit {
+        print("card number: \(number) was deinitialized")
+    }
+}
 
 
+var bill: Customer? = Customer(name: "Bill")
+
+bill?.creditCard = CreditCard(number: 123_456_789_123, owner: bill!)
 
 
+print(bill?.creditCard?.number)
+
+print(bill?.creditCard?.owner)
+
+
+bill = nil
 
 
 
