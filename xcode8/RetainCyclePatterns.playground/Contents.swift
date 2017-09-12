@@ -105,48 +105,114 @@ people = nil
 
 
 
+//
+//
+////  unowned scenario
+//
+//class Customer {
+//    let name: String
+//    var creditCard: CreditCard?
+//    
+//    init(name: String) {
+//        self.name = name
+//    }
+//    
+//    deinit {
+//        print("Custom name: \(name) was deinitialized")
+//    }
+//}
+//
+//class CreditCard {
+//    let number: Int64
+//    unowned let owner: Customer
+//    
+//    init(number: Int64, owner: Customer) {
+//        self.number = number
+//        self.owner = owner
+//    }
+//    deinit {
+//        print("card number: \(number) was deinitialized")
+//    }
+//}
+//
+//
+//var bill: Customer? = Customer(name: "Bill")
+//
+//bill?.creditCard = CreditCard(number: 123_456_789_123, owner: bill!)
+//
+//
+//print(bill?.creditCard?.number)
+//
+//print(bill?.creditCard?.owner)
+//
+//
+//bill = nil
 
 
-//  unowned 
 
-class Customer {
+
+
+// combined unowned and implicity unwrapped optional property
+
+class Country: NSObject {
     let name: String
-    var creditCard: CreditCard?
+    var capitalCity: City!
     
-    init(name: String) {
+    init(name: String, capitalName: String) {
+        
         self.name = name
+        super.init()
+        self.capitalCity = City(name: capitalName, country: self)
+        
     }
     
     deinit {
-        print("Custom name: \(name) was deinitialized")
+        print("the country \(name) is deinitialized")
+    }
+    
+    override var debugDescription: String {
+        return "\(name) has capital city \(capitalCity.name)"
     }
 }
 
-class CreditCard {
-    let number: Int64
-    unowned let owner: Customer
+class City {
+    let name: String
+    let country: Country
     
-    init(number: Int64, owner: Customer) {
-        self.number = number
-        self.owner = owner
+    init(name:String, country: Country) {
+        self.name = name
+        self.country = country
     }
     deinit {
-        print("card number: \(number) was deinitialized")
+        print("the city \(name) is deinitialized")
     }
 }
 
 
-var bill: Customer? = Customer(name: "Bill")
+let country = Country(name: "Taiwan", capitalName: "Taipei")
 
-bill?.creditCard = CreditCard(number: 123_456_789_123, owner: bill!)
-
-
-print(bill?.creditCard?.number)
-
-print(bill?.creditCard?.owner)
+print(country.debugDescription)
 
 
-bill = nil
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

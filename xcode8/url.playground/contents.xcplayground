@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios'>
+    <pages>
+        <page name='throw error'/>
+        <page name='url'/>
+        <page name='inheritance &amp; protocol'/>
+        <page name='ReferneceType'/>
+        <page name='highOrder'/>
+    </pages>
+</playground>
