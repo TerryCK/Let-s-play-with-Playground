@@ -1,31 +1,35 @@
 # Let play with playground
 
-
-### Retain Cycle Patterns
+## Outline
+### 1.Retain Cycle Patterns
 
 1. Two object retain cycle pattern
 2. Single object retain cycle pattern
 3. Closure retain cycle pattern
 
-### Delegate Parttern
+### 2.Design Patterns
 
-1. create an protocol with something you want
+1. Strategy
+2. Singleton
+3. Delegate
+4. Middiator
+5. Factory
 
-2.  comform the delegate protocol which can be delegated role and implement the protocol required
-
-3. create variable with delegate protocol type.
-
-4. get the reference and hook the delegate and be delegated role together.
-
-
-* Two object is independance by protocol as introduction media
+### 3.Protocol-Oriented Programming
 
 
-### Requirement
------------
+### 4.Grand Central Dispatch(GCD) 
 
-- Xcode 8.3
-- Swift 3.1
+
+### Miscellaneous
+[Interview Question for 正體中文](/interviews.md)
+## Requirement
+
+- Xcode 9
+- Swift 4
+
+## History
+	2017/10/3 update
 
 
 
