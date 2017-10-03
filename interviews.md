@@ -1,5 +1,10 @@
-#iOS 面試問題預測：
-## 閒聊
+# iOS 面試問題練習：
+## Outline
+
+1. [Talk](#talk)
+2. [Tool](#tool)
+3. [iOS Skills](#ios-skills)
+## Talk
 
 * 最近這兩天你有學到什麼知識/技能麼？
     * Protocol-Oriented Programming
@@ -30,6 +35,7 @@
     * 有，相關開源專案請參考：[https://goo.gl/n6woJX](https://goo.gl/n6woJX)
 * 你最近遇到過的一個技術挑戰是什麼？怎麼解決的？
 <!--思考中-->
+## Tool
 * 開發常用的工具有哪些？
     * git, cocoapods, xcode, json reader, source tree
 * 熟悉 CocoaPods 麼？能大概講一下工作原理麼？
@@ -51,6 +57,8 @@
             * git rebase
             * git push/pull 
             * git checkout [hash value] /  ‘branch’
+            
+## iOS Skills
 * 今年你最想掌握的一門技術是什麼？為什麼？目前已經做到了哪個程度？
     * Test Driven Development(TDD)
         * 缺點：短期來看會增加開發時程
@@ -64,6 +72,7 @@
             * Strategy
     * POP：
         * 配合functional Programming & Value type
+
 * 你一般是怎麼用 Instruments 的？
     * 檢測 memory Leak
 * 你一般是如何調試 Bug 的？
@@ -74,7 +83,7 @@
     * singleton, delegation, MVC, Factory, Observe, strategy
 * 如何實現單例，單例會有什麼弊端？
     * 宣告及調用方式：
-    * !["Go交換站"](/screenshots/sigleton.png)
+    * !["Go交換站"](/screenshots/Sigleton.png)
 	 * 弊端：會持續佔有記憶體資源￼
 * iOS 是如何管理記憶體的？
     * reference type: 記憶體管理方式— ARC, Heap
