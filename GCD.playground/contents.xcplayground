@@ -3,5 +3,6 @@
     <pages>
         <page name='GCD'/>
         <page name='Quick Help'/>
+        <page name='AppCoda'/>
     </pages>
 </playground>
