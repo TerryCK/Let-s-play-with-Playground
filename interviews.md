@@ -83,7 +83,7 @@
     * singleton, delegation, MVC, Factory, Observe, strategy
 * 如何實現單例，單例會有什麼弊端？
     * 宣告及調用方式：
-    * !["Go交換站"](/screenshots/Sigleton.png)
+    * !["Go交換站"](/screenshots/Singleton.png)
 	 * 弊端：會持續佔有記憶體資源￼
 * iOS 是如何管理記憶體的？
     * reference type: 記憶體管理方式— ARC, Heap
