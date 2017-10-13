@@ -14,6 +14,7 @@ class SingletonClass {
     var variableProperty = "variableProperty"
 }
 
+
 let singletonClass = SingletonClass.shared
 singletonClass.constantProperty
 singletonClass.variableProperty
@@ -31,8 +32,7 @@ singletonClass.someMethod()
 struct ASingleton {
     static let shared = ASingleton()
     private init() {
-        
-        print("create a singleton")
+        print("create a Asingleton")
     }
     var aProperty: String = "aProperty in Struct"
 }
@@ -45,8 +45,11 @@ struct NonSingleton {
 }
 
 
+
 for _ in 0...100 {
     let singleton = ASingleton.shared.aProperty // just created one
     let nonSingleton = NonSingleton()  /// create many of copies
 }
+
+
 

@@ -38,13 +38,13 @@
 ## Tool
 * 開發常用的工具有哪些？
     * git, cocoapods, xcode, json reader, source tree
-* 熟悉 CocoaPods 麼？能大概講一下工作原理麼？
+* 熟悉 CocoaPods 麼？能大概講一下工作原理嗎？
     * cocoapods 主要是依據該套件的 git repository 以及指定的版本來控管套件
     * 公開的Pods： 從CocoaPods的server讀取並依據Podspec的內容安裝套件
     * 私密Pods：的則需要指定路徑到該Podspec的所在位置
         * CocoaPods原理:
         1. Pods項目最終會編譯成一個名為libPods.a的文件,主項目只需要依賴這個.a文件即可
-        2. 對於資源文件,CocoaPods提供了一個名為Pods-resources.sh的bash腳本,該腳本在每次項目編譯的時候都會執行,將第三方的各種資源文件複製到目標目錄中
+        2. 對於資源文件, CocoaPods提供了一個名為Pods-resources.sh的bash腳本,該腳本在每次項目編譯的時候都會執行,將第三方的各種資源文件複製到目標目錄中
         3. CocoaPods通過一個名為Pods.xcconfig的文件在編譯時設置所有的依賴和參數最常用的版本控制工具是什麼，能大概講講原理麼？
     * git
         * 發展於2005, Linus Torvalds開始
@@ -86,25 +86,39 @@
     * !["Go交換站"](/screenshots/Singleton.png)
 	 * 弊端：會持續佔有記憶體資源￼
 * iOS 是如何管理記憶體的？
-    * reference type: 記憶體管理方式— ARC, Heap
+    * reference type: 記憶體管理方式— Heap, ARC
         * class
         * closure
-        * 當class/ closure被持有時Automatic Retain Counter即會+1，若使用weak 或 unwond 做屬性修飾，則不會
-        * 當兩個class / closure互為持有時，會有retain cycle發生，即為Memory leak，當memory達上限時，會造成app的Crash
+        * 當class/ closure被持有時Automatic Retain Counter即會+1，若使用weak 或 unwond 做前綴修飾，則Automatic retain counter 不會+1
+        * 關於 strong/weak 為兩個不同的retain count:
+        	* 有兩物件互相引用，A物件使用strong count, B物件使用weak count當strong count為0且weak count不為零時，B物件會與A物件同時被系統回收(deinitialize)，而回收時間點再runtime訪問完AB物件後進行回收，當尚未訪問B物件時，weak物件仍佔據記憶體資源造成冗餘的浪費。
+        	* Swift 4中，介紹了`side tables`的新概念，`side tables`是個可選值(optional)，用來儲存`object`的額外資訊，新的`object`可以有或沒有`side tables`，如果`object`不需要`side tables`就不需要浪費記憶體。[參考連結](https://goo.gl/UcQj3X)。
+        	*
+        * 兩個class / closure互為持有時，會有retain cycle發生，即為Memory leak，當memory使用達上限前，會先觸發memory warning依照使用者設計記憶體釋放流程釋放，若記憶體不足，則會造成app的Crash，記憶體崩潰點依裝置不同而有差異：[ios app maximum memory budget
+](https://goo.gl/g4vHXQ)
     * value type: 記憶體管理方式 — Stack
         * struct
         * enum
-* 什麼是Functional Programming?
-    * function 是 first class citizen
-    * function 可作為參數傳入function (high-Order function) 
-    * function 可以作為回傳
-    * Swift 在Collection內建有 map, flatMap, reduce, forEach, fillter等高階函數可使用
-* 什麼是Objective-Oriented Programming?
+* Swift的程式設計導向有OOP, POP及FP其主要設計的原則為：
+	1. 單一職責 - 每個class, function 只作一件事情
+	2. 避免重複作相同或相似程式片段
+	3. 好的組合優於繼承
+* 什麼是Functional Programming(FP)? [1](#1.objc.io-functional-Swift)
+	 * 精神：FP只專注在執行結果，不在意執行過程，func / struct 視為一致。
+	 * 解決痛點：避免使用狀態與可變對象(mutable)，有效降低程式複雜度的方式之一
+    * Function是first class citizen(一等公民)，可以與class一樣的操作如下：
+   		 * Function 可作為參數傳入function(high-Order function) 
+    	 * Function 可以作為回傳值
+    * Swift 在Collection內建有 map, flatMap, reduce, forEach, filter等高階函數可使用
+    * 需了解`throw`, `rethrow`, `@escaping`等關鍵字
+    * 可搭配`typealias`來使如`() -> ()`類的程式碼變得易閱讀。
+    	* `typealias FunctionType = () -> ()` 
+* 什麼是Objective-Oriented Programming(OOP)?
     * 具有：抽象、封裝、多型、`繼承` 等特性。 
     * 使用上述特性作為程式開發基礎架構。
     * Cocoa Touch是由OOP建構，如UIVew, UIViewController 等等...
-* 什麼是Protocol-Oriented Programming?
-    * 具有：抽象、封裝、多型、`合成`等特性。
+* 什麼是Protocol-Oriented Programming(POP)?
+    * 具有：抽象、封裝、多型(態)、`合成`等特性
     * 不是取代OOP，與OOP搭配使用，用來新增功能，減少Controller的工作負擔，增加維護性
     * 是Apple 官方推薦的開發方式
     * 搭配Value Type的only owner與Functional Programming
@@ -114,7 +128,7 @@
         * 以小模組功能作為開發基礎，透過合成function/protocol來實現整體功能。
 * 對於多執序有什麼看法？
     * NSOperations是一種類的封裝
-    * xthread
+    * pthread
     * Grand Central Dispatch(GCD) —  基礎是C語言的API 
     * 更新UI相關任務只可以在main queue裡執行
     * 什麼是同步(Synchronous)與非同步(Asynchronous )？
@@ -125,7 +139,7 @@
         * Serial 串列執行序： CPU時間資源給queue執行完整個block，可以假設整個CPU時間屬於此block
         * Concurrent 並發執行序: 將CPU時間碎片化後分在某一小時段分給Block執行，不能預設整個CPU時間為此block 
             * 注意情境：例如兩個不同 async - Concurrent Queue，同時讀寫相同Property，會造成資料錯亂。
-    * 需要考慮有`線程安全(Thread Safety)：
+    * 需要考慮有線程安全(Thread Safety)：
         1. Deadlock — 兩個線程互相等待彼此存取資源釋放造成線程死鎖無法執行(凍結)。
         2. Priority inversion — 優先權反轉，造成低優先線程較高優先線程優先執行。
             1. Starving Thread: 飢餓線程，當高優先權線程與中優先權線程數量遠多於低優先權線程時，低優先線程很難獲得存取的資源，此稱為線程飢餓。
@@ -147,5 +161,9 @@
 
 
 ## 更新歷史
-	2017/10/3 First Release
 
+	2017/10/10 Add Swift4 side table, modify memory manager details
+	2017/10/3  First Release
+
+## 文獻
+1.Objc.io functional Swift
