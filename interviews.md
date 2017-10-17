@@ -83,12 +83,11 @@
     * singleton, delegation, MVC, Factory, Observe, strategy
 * 如何實現單例，單例會有什麼弊端？
     * 宣告及調用方式：
-    * !["Go交換站"](/screenshots/Singleton.png)
+    * !["Singleton"](/screenshots/Singleton.png)
 	 * 弊端：會持續佔有記憶體資源￼
 * iOS 是如何管理記憶體的？
     * reference type: 記憶體管理方式— Heap, ARC
-        * class
-        * closure
+        * class, closure
         * 當class/ closure被持有時Automatic Retain Counter即會+1，若使用weak 或 unwond 做前綴修飾，則Automatic retain counter 不會+1
         * 關於 strong/weak 為兩個不同的retain count:
         	* 有兩物件互相引用，A物件使用strong count, B物件使用weak count當strong count為0且weak count不為零時，B物件會與A物件同時被系統回收(deinitialize)，而回收時間點再runtime訪問完AB物件後進行回收，當尚未訪問B物件時，weak物件仍佔據記憶體資源造成冗餘的浪費。
@@ -97,8 +96,7 @@
         * 兩個class / closure互為持有時，會有retain cycle發生，即為Memory leak，當memory使用達上限前，會先觸發memory warning依照使用者設計記憶體釋放流程釋放，若記憶體不足，則會造成app的Crash，記憶體崩潰點依裝置不同而有差異：[ios app maximum memory budget
 ](https://goo.gl/g4vHXQ)
     * value type: 記憶體管理方式 — Stack
-        * struct
-        * enum
+        * struct, enum
 * Swift的程式設計導向有OOP, POP及FP其主要設計的原則為：
 	1. 單一職責 - 每個class, function 只作一件事情
 	2. 避免重複作相同或相似程式片段
@@ -125,6 +123,7 @@
         * 高可測試性
         * 降低物件相互依賴
         * 強不變性(Strong immutable)
+        * 只有一位擁有者(only one owner)，在concurrency情境中，無Race Condition發生情況及`thread safe` 
         * 以小模組功能作為開發基礎，透過合成function/protocol來實現整體功能。
 * 對於多執序有什麼看法？
     * NSOperations是一種類的封裝
@@ -146,6 +145,19 @@
                 * 線程飢餓發生不代表會發生Deadlock情況，因為高優先線程會被執行完畢
                 * Deadlock與Starving Thread: 兩者發生共同原因是線程等不到cpu的執行時間資源
         3. Mutually exclusive( don’t write and read at same time)
+
+
+* 何謂`Runloop`:
+ 1. `Runloop`是一種循環，操作層級在OS, 是一種高級的循環、相比`forloop`及`while`使CPU忙碌，`runloop`在無事件操作時為一種等待休眠狀態直到事件被觸發，`runloop`會找對應的`handler`處理事件
+ 2. `Runloop`是`thread`的基礎，`Runloop`本質在`thread`中循環，並且接受循環任務與安排`thread`工作，在`thread`無任務時使`thread`進入睡眠狀態
+ 3. !["runloop"](/screenshots/runloop.jpg) source: Apple Doc
+ 4. `Runloop class`通常不被認為是`thread safe`, 只能用在當下的`thread`而無法在其他`thread`作為上下文使用，不應該嘗試在不同`thread`調用`Runloop`的方法，否則會有意外的結果產出 Ref: [Apple RunLoop](https://goo.gl/46x49i)
+* `Runloop` & `Thread`:
+	1.  每個`Thread `會有一個對應的`Runloop`對象，`main thread`的`runloop`會在app launched時完成啟動並處於`wait`的狀態，其他`thread`的`runloop`預設是不啟動的需手動啟動。
+* `runloop`檢測什麼？
+	1. `input Source`: 使用者單點擊、雙擊及手勢辨認等等...同步事件
+	2. `time Source`:  定時器Timer....同步事件
+	3. `core function`: 向 `thread`的`runloop`加入`observers`觀察事件
 * ViewController的 life cycle
     1. 建構到顯示：init -> loadView -> viewDidLoad -> viewWillAppear -> viewDidAppear 
     2. 消失到移除：viewWillDisappear -> viewDidDisappear -> dealloc 
@@ -157,13 +169,23 @@
     5. applicationDidEnterBackground:
     6. applicationWillEnterForeground:
     7. applicationWillTerminate: 
+
+    
+* 內聚與耦合概念：為求維護性需考慮整體程式架構及個別獨立模組的功能其準則
+	1. 內聚(Cohesion)： 
+		* 模組內完成單一任務的程度，盡可能緊密
+		* 積木如模組：每個積木的功能性不同，例如人物積木裡包含(臉、嘴、身體、腳及其附屬關節等...)，此積木功能完成度非常高，稱為高內聚力。
+	2. 耦合(Couplling): 
+		* 模組間關聯強度，盡可能個別獨立
+		* 積木如模組，不同形狀的積木有相同接口可以組合、拆離，不影響個別積木的功能(低耦合)
 * 持續更新
 
 
 ## 更新歷史
-
+	2017/10/16 Add runloop describe
 	2017/10/10 Add Swift4 side table, modify memory manager details
 	2017/10/3  First Release
 
 ## 文獻
-1.Objc.io functional Swift
+1. Objc.io functional Swift
+2. Pro Swift
