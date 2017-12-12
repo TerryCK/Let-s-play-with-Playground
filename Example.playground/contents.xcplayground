@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios'>
+    <pages>
+        <page name='Memory'/>
+        <page name='Protocol+Extension'/>
+        <page name='Random'/>
+        <page name='iBook Example'/>
+        <page name='typealias'/>
+        <page name='Expressible'/>
+        <page name='Generic'/>
+        <page name=' Protocol-Oriented Programming in Swift 3'/>
+        <page name='KeyPath'/>
+        <page name='CustomStringConvertable'/>
+        <page name='Facade Pattern'/>
+        <page name='Comparable'/>
+        <page name='threadSafty'/>
+        <page name='Bundle Extension Metadata'/>
+    </pages>
+</playground>
