@@ -41,6 +41,7 @@
 	 * 弊端：會持續佔有記憶體資源￼
 	 
 ## 程式設計原則(內聚與耦合)：
+* 重複利用相同程式碼
 * 內聚與耦合概念：為求維護性需考慮整體程式架構及個別獨立模組的功能其準則
 	1. 內聚(Cohesion)： 
 		* 模組內完成單一任務的程度，盡可能緊密
@@ -64,6 +65,7 @@
     	 * Function 可以作為回傳值
     * Swift 在Collection內建有 map, flatMap, reduce, forEach, filter等高階函數可使用
     * 需了解`throw`, `rethrow`, `@escaping`等關鍵字
+    	* escaping closure的意思是: 調用此closure的位置在函數執行完成後，超過此函數的範圍，所以稱為逃逸閉包(注：從閉包從函數中逃逸)
     * 可搭配`typealias`來使如`() -> ()`類的程式碼變得易閱讀。
     	* `typealias FunctionType = () -> ()` 
 * 什麼是Objective-Oriented Programming(OOP)?
@@ -122,11 +124,11 @@
     | Custom queue | DispatchQueue | Serial or  Concurrent | sub-thread |
     
     * 根據CPU時間的使用方式分類 1.同步(Synchronous)與 2.非同步(Asynchronous):
-		1. 同步：同一CPU時間只給單一`thread`處理`block`，須等此`block`執行完，才會繼續往後執行。
+		1. 同步：同一CPU時間只給單一`thread`處理`block`，必須等此`block`執行完成，才會繼續執行。
 			* 會阻塞`thread`須注意
 			* 如果在main Queue使用同步時，會造成UI凍結而影響UX
         
-    	2. 非同步：同一CPU時間分享給不同`thread`處理`block`，不考慮執行進度，繼續執行此`block`之後的程式
+    	2. 非同步：同一CPU時間分享給不同`thread`處理`block`，不考慮執行進度，不會等待此`block`是否已執行完成，會直接繼續執行此`block`之後的程式
         	* 不會阻塞`thread`
         	* 通常使用此模式
         	* 須切至Main queue將結果進行UI更新
