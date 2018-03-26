@@ -27,8 +27,6 @@ singletonClass.someMethod()
 
 
 // Mark: struct Singleton
-
-
 struct ASingleton {
     static let shared = ASingleton()
     private init() {
@@ -44,11 +42,9 @@ struct NonSingleton {
     }
 }
 
-
-
 for _ in 0...100 {
-    let singleton = ASingleton.shared.aProperty // just created one
-    let nonSingleton = NonSingleton()  /// create many of copies
+    let _ = ASingleton.shared.aProperty // just created once
+    let _ = NonSingleton()  /// create many of copies
 }
 
 
