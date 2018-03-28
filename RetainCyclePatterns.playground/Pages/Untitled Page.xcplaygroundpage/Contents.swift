@@ -70,12 +70,9 @@ a = nil
 
 
 //: ## Closure retain cycle pattern
-
 class People {
-    
     var lastName: String
     var firstName: String
-    
     lazy var name: () -> String = {
         // resolution 
         // [unowned self] in
@@ -94,9 +91,7 @@ class People {
     }
 }
 
-
 var people: People? = People(firstName: "Bob", lastName: "Chen")
-
 people?.name()
 people = nil
 
