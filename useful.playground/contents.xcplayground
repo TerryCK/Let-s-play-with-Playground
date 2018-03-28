@@ -8,11 +8,12 @@
         <page name='Struct&amp;Map'/>
         <page name='KeyPath'/>
         <page name='RawRepresentable'/>
-        <page name='LinkList'/>
         <page name='IslandCity'/>
-        <page name='LinkedList'/>
-        <page name='LinkedListEnum'/>
         <page name='MetaType'/>
         <page name='OptionalFunc'/>
+        <page name='LinkList'/>
+        <page name='LinkedList'/>
+        <page name='LinkedListEnum'/>
+        <page name='MatchPattern'/>
     </pages>
 </playground>
