@@ -6,5 +6,6 @@
         <page name='inheritance &amp; protocol'/>
         <page name='ReferneceType'/>
         <page name='highOrder'/>
+        <page name='RegularExpression'/>
     </pages>
 </playground>

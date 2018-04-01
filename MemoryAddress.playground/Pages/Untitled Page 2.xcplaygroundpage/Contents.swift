@@ -7,7 +7,7 @@ func aFunctionWithaValueType() {
     
     let x = 20
     
-    sizeof(value)
+    size(ofValue:value)
     sizeof(x)
     //    print("number1 in aFunction():", number1)
     //    let size = sizeof(number1)

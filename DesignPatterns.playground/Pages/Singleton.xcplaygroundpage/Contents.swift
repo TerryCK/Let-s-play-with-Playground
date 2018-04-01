@@ -27,12 +27,18 @@ singletonClass.someMethod()
 
 
 // Mark: struct Singleton
+
+
 struct ASingleton {
     static let shared = ASingleton()
     private init() {
+        
         print("create a Asingleton")
     }
-    var aProperty: String = "aProperty in Struct"
+    var aProperty: String = "create a Asingleton"
+    mutating func method(a: String) {
+        aProperty = a
+    }
 }
 
 struct NonSingleton {
@@ -42,9 +48,12 @@ struct NonSingleton {
     }
 }
 
+
+
 for _ in 0...100 {
-    let _ = ASingleton.shared.aProperty // just created once
-    let _ = NonSingleton()  /// create many of copies
+    var singleton = ASingleton.shared // just created one
+    singleton.method(a: "x")
+//    let nonSingleton = NonSingleton()  /// create many of copies
 }
 
 
