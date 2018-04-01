@@ -15,5 +15,7 @@
         <page name='Comparable'/>
         <page name='threadSafty'/>
         <page name='Bundle Extension Metadata'/>
+        <page name='Closure&amp;function'/>
+        <page name='dictionary'/>
     </pages>
 </playground>

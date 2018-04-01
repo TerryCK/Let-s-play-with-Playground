@@ -6,5 +6,7 @@
         <page name='MatchPattern'/>
         <page name='PatternMatch'/>
         <page name='LinkedList'/>
+        <page name='Type Property'/>
+        <page name='AllCasesEnum'/>
     </pages>
 </playground>

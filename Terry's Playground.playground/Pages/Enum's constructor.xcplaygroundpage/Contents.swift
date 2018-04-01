@@ -10,6 +10,15 @@ extension RawRepresentable where Self.RawValue == Int {
     
     var caseName: String { return String(describing: self) }
     
+    init?(caseName: String) {
+        let currectCase = Self.allCases.first { $0.caseName == caseName }
+        if let currectCase =  currectCase {
+            self = currectCase
+        } else {
+            return nil
+        }
+    }
+    
     static func allCases(_ index: Int = 0, array: [Self] = [Self]()) -> [Self] {
         switch Self(rawValue: index) {
         case let element? : return allCases(index + 1, array: array + [element])
@@ -25,15 +34,7 @@ extension CellConfigurable where Self.RawValue == Int {
         }
         self = Self.allCases[indexPath.row]
     }
-    init?(caseName: String) {
-        
-        let currectCase = Self.allCases.first { $0.caseName == caseName }
-        if let currectCase =  currectCase {
-            self = currectCase
-        } else {
-            return nil
-        }
-    }
+   
 }
 
 //MARK - declaration
@@ -64,3 +65,22 @@ enum TerryErrorCode: Int {
     }
     
 }
+enum SPIError: Int {
+     case ITG550, ITG551, TimeOut, ITG18213
+    static var x: [SPIError] = [ITG550, ITG551]
+     var errorCodeType: ErrorCodeType {
+        if SPIError.x.contains(self) {
+            return .forbidden
+        
+        
+    }
+}
+enum ErrorCodeType: Int {
+    case forbidden, kickout, normal
+}
+
+enum Forbidden: Int {
+    case ITG550, ITG551
+}
+
+
