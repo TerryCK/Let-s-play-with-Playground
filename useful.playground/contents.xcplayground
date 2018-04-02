@@ -15,5 +15,9 @@
         <page name='LinkedList'/>
         <page name='LinkedListEnum'/>
         <page name='MatchPattern'/>
+        <page name='Memory Size'/>
+        <page name='TimeUtil'/>
+        <page name='String'/>
+        <page name='access Controller'/>
     </pages>
 </playground>
