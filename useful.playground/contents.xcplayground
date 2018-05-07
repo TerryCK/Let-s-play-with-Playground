@@ -19,5 +19,11 @@
         <page name='TimeUtil'/>
         <page name='String'/>
         <page name='access Controller'/>
+        <page name='versionCompare'/>
+        <page name='GernicProtocol'/>
+        <page name='Untitled Page'/>
+        <page name='FP'/>
+        <page name='Method Dispatch'/>
+        <page name='Typecasting Match'/>
     </pages>
 </playground>

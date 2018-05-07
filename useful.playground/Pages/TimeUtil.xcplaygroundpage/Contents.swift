@@ -111,3 +111,7 @@ dateFormatter.date(from: "0")
 dateFormatter.string(for: 123)
 
 
+var (y, n) = ("Terry", "Tony")
+print(y)
+(n, y) = (y, n)
+print(y)

@@ -20,6 +20,7 @@ struct Stack<Item>: Container {
     mutating func append(_ item: Item) {
         self.push(item)
     }
+    
     var count: Int {
         return items.count
     }
@@ -91,6 +92,13 @@ func someFunc<T,U>(s1: T, s2: U) where T:Sequence, U: Sequence ,T.Iterator.Eleme
 
 
 
+let aray = [1,2]
+aray.makeIterator()
+struct MyStruct: IteratorProtocol {
+    mutating func next() -> MyStruct? {
+        return MyStruct()
+    }
+}
 
 
 

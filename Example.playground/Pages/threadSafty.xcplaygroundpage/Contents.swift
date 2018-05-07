@@ -1,4 +1,34 @@
  import Foundation
+
+ 
+ 
+ func sizeof<T> (_ : T) -> Int
+ {
+    return (MemoryLayout<T>.size)
+ }
+ 
+ func sizeof<T> (_ value : [T]) -> Int
+ {
+    return (MemoryLayout<T>.size * value.count)
+ }
+ 
+ func address(of o: UnsafeRawPointer) -> String {
+    
+    return Int(bitPattern: o).toHexString
+//    return unsafeBitCast(o, to: Int.self).toHexString
+ }
+ 
+ func addressHeap<T: AnyObject>(_ o: T) -> String {
+    return unsafeBitCast(o, to: Int.self).toHexString
+ }
+ 
+ extension Int {
+    var toHexString: String {
+        return NSString(format: "%p", self) as String
+    }
+ }
+ 
+
  
  var array = [1,2,3,4]
  
@@ -16,30 +46,4 @@
  address(of: array)
  
  
- 
- 
- 
- func sizeof<T> (_ : T) -> Int
- {
-    return (MemoryLayout<T>.size)
- }
- 
- func sizeof<T> (_ value : [T]) -> Int
- {
-    return (MemoryLayout<T>.size * value.count)
- }
- 
- func address(of o: UnsafeRawPointer) -> String {
-    return unsafeBitCast(o, to: Int.self).toHexString
- }
- 
- func addressHeap<T: AnyObject>(_ o: T) -> String {
-    return unsafeBitCast(o, to: Int.self).toHexString
- }
- 
- extension Int {
-    var toHexString: String {
-        return NSString(format: "%p", self) as String
-    }
- }
  

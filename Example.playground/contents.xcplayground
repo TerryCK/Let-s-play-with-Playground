@@ -2,7 +2,7 @@
 <playground version='6.0' target-platform='ios'>
     <pages>
         <page name='Memory'/>
-        <page name='Protocol+Extension'/>
+        <page name='Protocol+Extension polymorphism'/>
         <page name='Random'/>
         <page name='iBook Example'/>
         <page name='typealias'/>
@@ -17,5 +17,9 @@
         <page name='Bundle Extension Metadata'/>
         <page name='Closure&amp;function'/>
         <page name='dictionary'/>
+        <page name='Copy on Write'/>
+        <page name='About Struct'/>
+        <page name='Generics'/>
+        <page name='Enum'/>
     </pages>
 </playground>
