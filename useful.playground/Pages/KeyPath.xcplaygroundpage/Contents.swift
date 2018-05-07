@@ -2,20 +2,7 @@
 
 import Foundation
 
-//struct Person {
-//    var socialSecurityNumber: String
-//    var name: String
-//}
-//
-//struct Book {
-//    var isbn: String
-//    var title: String
-//}
 
-
-//protocol Identifiable {
-//    var id: String { get set }
-//}
 
 protocol Identifiable {
     associatedtype ID
@@ -41,3 +28,6 @@ func printID<T: Identifiable>(thing: T) {
 let taylor = Person(socialSecurityNumber: "555-55-5555", name: "Taylor Swift")
 
 printID(thing: taylor)
+
+
+
