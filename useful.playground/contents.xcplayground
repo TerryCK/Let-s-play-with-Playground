@@ -25,5 +25,7 @@
         <page name='FP'/>
         <page name='Method Dispatch'/>
         <page name='Typecasting Match'/>
+        <page name='KeyPathTypes'/>
+        <page name='functionalProgramming'/>
     </pages>
 </playground>
