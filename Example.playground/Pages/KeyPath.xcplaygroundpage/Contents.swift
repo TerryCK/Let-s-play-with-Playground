@@ -18,6 +18,10 @@ struct Cavaliers {
     func goTomaxPoint() {
         print("\(name) is now travelling at warp \(maxPoint)")
     }
+    
+    subscript(keyPath: AnyKeyPath) -> String {
+        return "a"
+    }
 }
 
 // create instances of those two structs

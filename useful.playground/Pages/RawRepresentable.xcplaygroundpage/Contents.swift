@@ -47,17 +47,17 @@ extension CellConfigurable where Self.RawValue == Int {
     
 }
 
-//MARK - declaration
-enum Planet: Int, CellConfigurable {
-    case solar, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune
-}
-enum Weather: Int {
-    case sunny, rain, cloudy
-}
-
-enum Animal: Int {
-    case dog, cat, fish
-}
+////MARK - declaration
+//enum Planet: Int, CellConfigurable {
+//    case solar, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune
+//}
+//enum Weather: Int {
+//    case sunny, rain, cloudy
+//}
+//
+//enum Animal: Int {
+//    case dog, cat, fish
+//}
 
 //let testResult = Weather.allCase[5]
 
@@ -69,6 +69,88 @@ enum Animal: Int {
 //
 //print("count: ", Planet.allCase.count)
 
-print("Planets1:", Planet.all1().map { $0.name } )
-print("Planets2:", Planet.all2().map { $0.name } )
-print("Planets3:", Planet.all3().map { $0.name } )
+//print("Planets1:", Planet.all1().map { $0.name } )
+//print("Planets2:", Planet.all2().map { $0.name } )
+//print("Planets3:", Planet.all3().map { $0.name } )
+protocol EnumCollection: Hashable {
+     static var allCase: [Self] { get }
+}
+
+extension EnumCollection {
+     var terry : String { return "EnumCollection" }
+    public static func cases() -> AnySequence<Self> {
+        
+        return AnySequence { () -> AnyIterator<Self> in
+            var raw = 0
+            return AnyIterator.init( {
+                let current: Self = withUnsafePointer(to: &raw, { $0.withMemoryRebound(to: self, capacity: 1, { $0.pointee } ) } )
+                    
+                   print(type(of: current), current.terry, raw)
+                
+                guard current.hashValue == raw else {
+                    print(type(of: current), current.terry, raw)
+                    
+                    return nil
+                }
+                raw += 1
+                return current
+                }
+            
+            )
+            
+            
+//            return AnyIterator {
+//                let current: Self = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: self, capacity: 1) { $0.pointee } }
+//                print(current.hashValue, raw)
+//                guard current.hashValue == raw else {
+//                    print(current.hashValue, raw)
+//                    return nil
+//                }
+//                raw += 1
+//                return current
+//            }
+        }
+    }
+    
+    public static var allCase: [Self] {
+        return Array(self.cases())
+    }
+}
+
+//extension RawRepresentable where Self: Hashable {
+//    public static func cases() -> AnySequence<Self> {
+//        return AnySequence { () -> AnyIterator<Self> in
+//            var raw = 0
+//            return AnyIterator {
+//                let current: Self = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: self, capacity: 1) { $0.pointee } }
+//                guard current.hashValue == raw else {
+//                    return nil
+//                }
+//                raw += 1
+//                return current
+//            }
+//        }
+//    }
+//
+//    public static var allCase: [Self] {
+//        return Array(self.cases())
+//    }
+//}
+
+enum DNA: EnumCollection {
+    case A, G, C, T
+}
+DNA.allCase
+DNA.A.hashValue
+
+
+struct Terry {
+    
+}
+
+extension Terry {
+//    let x: String = ""
+    
+    static let y: String = ""
+}
+

@@ -11,6 +11,18 @@ func makeCounter() -> () -> Int {
     }
 }
 
+
+class myClass {
+    var value = 0
+    func x()-> Int {
+        
+            value += 1
+        
+        return value
+        
+    }
+    
+}
 let counter1 = makeCounter()
 let counter2 = makeCounter()
 
@@ -128,23 +140,33 @@ var terry = 1
 //    return r
 //}
 
+class MyClass {
+    let numbers: [Int] = []
 
-func logicAnd(_ l: Bool, _ r: @autoclosure ()-> Bool) -> Bool {
-    guard l else { return false }
-    
-    return r()
+    func logicAnd(_ l: Bool, _ r:  @autoclosure () -> Bool) -> Bool {
+        guard l else { return false }
+        
+        return r()
+    }
+    func test() {
+        
+        if logicAnd(!numbers.isEmpty,  numbers[0] > 0 ) {
+            // This failed
+        }
+    }
 }
 
-let numbers: [Int] = []
-
-if !numbers.isEmpty && numbers[0] > 0 {
-    // This works
-}
 
 
-if logicAnd(!numbers.isEmpty, numbers[0] > 0) {
-    // This failed
-}
+
+//if !numbers.isEmpty && numbers[0] > 0 {
+//    // This works
+//}
+
+
+//if logicAnd(!numbers.isEmpty, { numbers[0] > 0 }) {
+//    // This failed
+//}
 
 // closure implicity for escaping for optional closure
 

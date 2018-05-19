@@ -7,5 +7,6 @@
         <page name='ReferneceType'/>
         <page name='highOrder'/>
         <page name='RegularExpression'/>
+        <page name='emoji'/>
     </pages>
 </playground>
