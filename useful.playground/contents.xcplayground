@@ -15,5 +15,7 @@
         <page name='LinkedList'/>
         <page name='LinkedListEnum'/>
         <page name='MatchPattern'/>
+        <page name='override Class property'/>
+        <page name='Struct init'/>
     </pages>
 </playground>
