@@ -8,5 +8,6 @@
         <page name='highOrder'/>
         <page name='RegularExpression'/>
         <page name='emoji'/>
+        <page name='ContainEnum'/>
     </pages>
 </playground>

@@ -15,22 +15,5 @@
         <page name='LinkedList'/>
         <page name='LinkedListEnum'/>
         <page name='MatchPattern'/>
-<<<<<<< HEAD
-        <page name='override Class property'/>
-        <page name='Struct init'/>
-=======
-        <page name='Memory Size'/>
-        <page name='TimeUtil'/>
-        <page name='String'/>
-        <page name='access Controller'/>
-        <page name='versionCompare'/>
-        <page name='GernicProtocol'/>
-        <page name='Untitled Page'/>
-        <page name='FP'/>
-        <page name='Method Dispatch'/>
-        <page name='Typecasting Match'/>
-        <page name='KeyPathTypes'/>
-        <page name='functionalProgramming'/>
->>>>>>> bc3eafc032a0deb6c51da4c5e234db481431af1a
     </pages>
 </playground>
