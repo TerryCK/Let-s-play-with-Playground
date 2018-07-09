@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios'/>
+<playground version='6.0' target-platform='ios'>
+    <pages>
+        <page name='BinarySearch'/>
+        <page name='Codable'/>
+        <page name='insertionSort'/>
+        <page name='Queue'/>
+        <page name='Regex'/>
+        <page name='sort'/>
+        <page name='stack'/>
+        <page name='Tree'/>
+        <page name='time'/>
+        <page name='condition comforms'/>
+        <page name='lazy collection'/>
+    </pages>
+</playground>

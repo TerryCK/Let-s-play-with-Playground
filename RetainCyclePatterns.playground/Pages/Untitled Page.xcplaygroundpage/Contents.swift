@@ -69,16 +69,32 @@ a = nil
 
 
 
+class B {
+    var reference: (() -> Void)?
+}
 //: ## Closure retain cycle pattern
 class People {
     var lastName: String
     var firstName: String
-    lazy var name: () -> String = {
-        // resolution 
+//    lazy var name: () -> String = {
+//        // resolution
+//        // [unowned self] in
+//        // [capture list] unowned(non-optional) or weak(optional)
+//        return self.firstName + " " + self.lastName
+//    }
+    
+    lazy var name: String = {
+        // resolution
         // [unowned self] in
         // [capture list] unowned(non-optional) or weak(optional)
         return self.firstName + " " + self.lastName
-    }
+    }()
+    
+    lazy var object: B = { // [unowned self] in
+        let b = B()
+        b.reference = { print(self) }
+        return b
+    }()
     
     init(firstName: String, lastName: String) {
         self.lastName = lastName
@@ -92,7 +108,7 @@ class People {
 }
 
 var people: People? = People(firstName: "Bob", lastName: "Chen")
-people?.name()
+people?.object
 people = nil
 
 
@@ -187,3 +203,34 @@ class City {
 let country = Country(name: "Taiwan", capitalName: "Taipei")
 
 print(country.debugDescription)
+
+
+
+
+
+
+
+
+
+class Observation: NSObject {
+    @objc dynamic var oberservableProperty: String? = ""
+}
+let x = Observation()
+class Observer {
+    private var observation: NSKeyValueObservation?
+    init() {
+        self.observation = x.observe(\.oberservableProperty, changeHandler: { [unowned self] (ob, change) in
+            print(self)
+        })
+    }
+    
+    deinit {
+        print("deinit Observer")
+    }
+}
+
+
+var observer:Observer?  = Observer()
+//x.oberservableProperty = "x"
+observer = nil
+x.oberservableProperty = "x"

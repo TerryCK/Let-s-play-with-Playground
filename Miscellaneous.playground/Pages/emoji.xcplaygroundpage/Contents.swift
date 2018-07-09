@@ -1,12 +1,23 @@
-enum Language: String {
-    case english, chinese
+
+
+enum Life {
+    case cycle
 }
-let str: [String?] = ["chinese"]
-let result = str.compactMap(Language.init)
-str.compactMap { (<#String?#>) -> ElementOfResult? in
-    <#code#>
-}
-str.flatMap { (<#String?#>) -> Sequence in
-    <#code#>
-}
+
+var x : Life? = .cycle
+
+x == .cycle
+
+x = nil
+
+x == .cycle
+
+
+let array1: [Int?] = [1,2,3,4,5]
+let array2 = array1
+
+[array1, array2].flatMap { $0 }.flatMap { $0 }.forEach { print($0) }
+
+
+
 
