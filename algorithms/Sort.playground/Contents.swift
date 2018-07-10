@@ -40,12 +40,13 @@ extension Array where Element: Numeric & Comparable {
     func insertSorted(by closure: (Element, Element) -> Bool) -> Array {
         var result = self
         for outIndex in 0...count - 1 {
-            let key = self[outIndex]
+            let key = result[outIndex]
             var index = outIndex - 1
-            while index >= 0 && closure(result[index], key) {
+            while index >= 0 && closure(key, result[index]) {
                 result[index + 1] = result[index]
                 index -= 1
             }
+            print(index + 1)
             result[index + 1] = key
             print(result)
         }
@@ -57,10 +58,10 @@ extension Array where Element: Numeric & Comparable {
 [1,23,5,6,12].bubbleSorted()
 [10.2, 20.1, 30.0, 30.1, 20.9].bubbleSorted()
 
-[1,3,4,2].bubbleSorted(by: <)
+[1,3,4,2,5,7,6].bubbleSorted(by: <)
 
 
 [10.2, 20.1, 30.0, 30.1, 20.9].insertSorted()
-[1,3,4,2].insertSorted(by: <)
+[1,3,4,2,5,7,6].insertSorted(by: <)
 
 
