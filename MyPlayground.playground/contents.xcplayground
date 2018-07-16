@@ -12,5 +12,7 @@
         <page name='time'/>
         <page name='condition comforms'/>
         <page name='lazy collection'/>
+        <page name='optionalCoparable'/>
+        <page name='Untitled Page'/>
     </pages>
 </playground>
