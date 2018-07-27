@@ -34,7 +34,7 @@ extension String {
         return regex.firstMatch(in: lhs, options: [], range: range) != nil
     }
 }
-
+"itms-services://?action=download-manifest&url=https://cdnq-188.xndev.net/artifact/ios-188bet/1.0717.3.220/manifest.plist" ~= "^itms-services://\\?action=download-manifest&url=https://.*manifest.plist$"
 
 "AEB" ~= "A(CD|EF)B"
 

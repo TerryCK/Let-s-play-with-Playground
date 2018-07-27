@@ -26,6 +26,7 @@ let jsonArray =   """
 ]
 """.data(using: .utf8)!
 
+
 struct Plane: Codable {
     let manuFacturer: String, model: String, seats: Int
     

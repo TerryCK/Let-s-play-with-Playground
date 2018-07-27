@@ -96,11 +96,19 @@ struct X: OptionalComparable, Comparable {
     }
 }
 
+let local: String? = "0.0.0.0"
+let remote = "0.0.0.1"
 
-let x: X?  = X()
-let y: X? = X()
-
-y > x
+let x = local?.compare(remote, options: .numeric, range: nil, locale: nil)
+print(x?.rawValue)
+print(x?.hashValue)
+switch x {
+case .orderedAscending?:  "orderedAscending"
+case .orderedDescending?:  "orderedDescending"
+case .orderedSame?:  "orderedSame"
+case .none:
+    break
+}
 
 //let versionString = "1.0.0.00"
 //
