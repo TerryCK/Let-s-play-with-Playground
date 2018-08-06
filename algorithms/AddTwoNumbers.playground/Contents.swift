@@ -13,6 +13,7 @@
 import Foundation
 
 class ListNode {
+    
     var val: Int
     var next: ListNode?
     
@@ -30,6 +31,28 @@ class ListNode {
     }
 }
 
+class LinkedList: ExpressibleByArrayLiteral, CustomDebugStringConvertible {
+    typealias ArrayLiteralElement = Int
+    
+    var head: ListNode?
+    var debugDescription: String {
+        print("LinkedList")
+            head?.traversal()
+            return "--------"
+    }
+    
+    required init(arrayLiteral elements: Int...) {
+        var head: ListNode? = nil
+        elements.forEach { (val) in
+            let node = ListNode(val: val)
+            node.next = head
+            head = node
+        }
+        self.head = head
+    }
+    
+}
+
 
 extension Array where Element == Int {
     var getReverseLinkList: ListNode? {
@@ -42,6 +65,12 @@ extension Array where Element == Int {
         return head
     }
 }
+
+
+let l3: LinkedList = [3,4,2]
+
+
+
 let l1 = [3,4,2].getReverseLinkList
 let l2 = [5,6,4].getReverseLinkList
 
