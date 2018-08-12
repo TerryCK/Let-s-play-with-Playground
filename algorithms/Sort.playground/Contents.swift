@@ -25,7 +25,7 @@ extension Array where Element: Numeric & Comparable {
     
     func insertSorted() -> Array {
         var result = self
-        for outIndex in 2...count - 1 {
+        for outIndex in 1...count - 1 {
             let key = self[outIndex]
             var index = outIndex - 1
             while index > 0 && result[index] > key {
