@@ -55,6 +55,7 @@ print("\(#keyPath(Message.channel))")
 
 
 
+"class".regex ~= "class<Swift.Int>"
 
 
 
