@@ -17,6 +17,7 @@ extension Matchable {
 extension String: Matchable {
     
     public func capturedGroups(with regex: Regex, options: NSRegularExpression.Options = []) -> [String] {
+        return Array(matches(with: regex, options: options)[1...])
         let m = matches(with: regex, options: options)
         return m.count>1 ? Array(m.dropFirst()) : []
     }
@@ -29,32 +30,37 @@ extension String: Matchable {
     }
 }
 
-func test1() {
-    let string = "localhost-error.xxx/iaj/adji/withdrawal"
-    
-    let m = string.matches(with: "localhost-error.*/([^/]*)/(withdrawal|deposit)".regex)
-    let c = string.capturedGroups(with: "localhost-error.*/([^/]*)/(withdrawal|deposit)".regex)
-    print("matches: ", m)
-    print("groups: ", c)
+"string".capturedGroups(with: "string".regex)
+[1,2,3].dropFirst()
+[1][1...]
 
-}
-func test2 (){
-    let string = "test"
-    let m = string.matches(with: "test".regex)
-    let c = string.capturedGroups(with: "test".regex)
-    print("matches: ", m)
-    print("groups: ", c)
-}
-
-//test2()
-
-func test3() {
-    let string = "test"
-    let m = string.matches(with: "(test)".regex)
-    let c = string.capturedGroups(with: "(test)".regex)
-    print("matches: ", m)
-    print("groups: ", c)
-}
-
-["s", "g"] == ["s", "g"]
+//
+//func test1() {
+//    let string = "localhost-error.xxx/iaj/adji/withdrawal"
+//
+//    let m = string.matches(with: "localhost-error.*/([^/]*)/(withdrawal|deposit)".regex)
+//    let c = string.capturedGroups(with: "localhost-error.*/([^/]*)/(withdrawal|deposit)".regex)
+//    print("matches: ", m)
+//    print("groups: ", c)
+//
+//}
+//func test2 (){
+//    let string = "test"
+//    let m = string.matches(with: "test".regex)
+//    let c = string.capturedGroups(with: "test".regex)
+//    print("matches: ", m)
+//    print("groups: ", c)
+//}
+//
+////test2()
+//
+//func test3() {
+//    let string = "test"
+//    let m = string.matches(with: "(test)".regex)
+//    let c = string.capturedGroups(with: "(test)".regex)
+//    print("matches: ", m)
+//    print("groups: ", c)
+//}
+//
+//["s", "g"] == ["s", "g"]
 //string.capturedGroups(with: "localhost-error.*/([^/]*)/(withdrawal|deposit)".regex)
