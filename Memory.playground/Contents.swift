@@ -48,3 +48,15 @@ address(of: array)
 
 
 
+struct BatteryStationRecord: Codable {
+    let id: Int, checkinCount: UInt8, checkinDay: Date?
+}
+sizeof(BatteryStationRecord(id: 0, checkinCount: 0, checkinDay: nil))
+
+
+sizeof(Optional(Date()))
+sizeof("das")
+sizeof(Optional(UInt8(1)))
+sizeof(10)
+UInt8.max
+33000/25

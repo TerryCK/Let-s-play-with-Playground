@@ -5,7 +5,8 @@ let json = """
 {
     "ManuFacturer" : "Cessna",
     "model" : "172 Skyawk",
-    "seats" : 4
+    "seats" : 4,
+    "additional" : 5
 }
 """.data(using: .utf8)!
 
@@ -25,6 +26,9 @@ let jsonArray =   """
 ]
 """.data(using: .utf8)!
 
+enum Seats: Int, Codable {
+    case abc = 4
+}
 
 struct Plane: Codable {
     let manuFacturer: String, model: String, seats: Seats
@@ -57,9 +61,6 @@ let y = "x"
 x == y
 
 
-enum Seats: Int, Codable {
-    case abc = 4
-}
 
 //extension Plane {
 //    //    var test: Int { return self.model.count    }
@@ -134,12 +135,57 @@ let test = """
 
 
 
-Array(1...1).count
-(0...1000).forEach { (_) in
-    
-    if Int(arc4random_uniform(2)) == 2 {
-        print("2")
+let promotionPayload = """
+[
+    {
+        "bannerUrl": "",
+        "description": "",
+        "name": "Lucky Wheel - SPPT20161108001",
+        "promoCode": "SPPT20161108001"
+                }, {
+        "bannerUrl": "",
+        "code": "en-gb",
+        "description": "",
+        "name": "Re-Deposit-REDP20162508001-20160825",
+        "promoCode": "REDP20162508001"
     }
-   
+]
+""".data(using: .utf8)!
+
+
+
+struct WelcomeElement: Codable {
+    let bannerURL, description, name, promoCode: String
+    let code: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case bannerURL = "bannerUrl"
+        case description, name, promoCode, code
+    }
 }
 
+
+let object = try! JSONDecoder().decode([WelcomeElement].self, from: promotionPayload)
+object.first?.code
+object.last?.code
+
+
+
+
+
+let dpPayload = """
+   {
+   
+    "deposite": ["deposit"],
+    }
+""".data(using: .utf8)!
+
+
+
+struct Terry: Decodable {
+    let withdrawal: [String]?
+}
+
+let terry = try! JSONDecoder().decode(Terry.self, from: dpPayload)
+
+terry.withdrawal
