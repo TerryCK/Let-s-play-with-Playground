@@ -48,6 +48,19 @@ address(of: array)
 
 
 
+MemoryLayout<Decimal>.size
+MemoryLayout<Double>.size
+
+
+
+var originArray = [1,2,3,4]
+var copy = originArray
+address(of: originArray)
+address(of: copy)
+originArray.append(1)
+copy.append(1)
+address(of: copy)
+address(of: originArray)
 struct BatteryStationRecord: Codable {
     let id: Int, checkinCount: UInt8, checkinDay: Date?
 }
@@ -60,3 +73,59 @@ sizeof(Optional(UInt8(1)))
 sizeof(10)
 UInt8.max
 33000/25
+
+
+class MyClass {
+    
+}
+
+let myClass = MyClass()
+let x = (1,myClass,2)
+sizeof(myClass)
+sizeof(x)
+//dump(myClass)
+
+struct MyStruct {
+    var x: UInt8 = 1
+    var z: UInt8 = 1
+    var y: Double = 1
+}
+
+let myStruct = MyStruct()
+sizeof(myStruct)
+
+
+class TestPrivateClass: UIViewController, AccessbilityID {
+    lazy var button: UIButton! = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.text = "test"
+        return button
+    }()
+    
+    
+}
+
+protocol AccessbilityID {
+    func setup()
+}
+
+extension AccessbilityID {
+    func setup() {
+        let mirror = Mirror(reflecting: self)
+        for case let (key?, button as UIButton) in mirror.children {
+            button.accessibilityIdentifier = " \(mirror.subjectType)_\(String(describing: key))"
+        }
+    }
+}
+
+
+
+
+let test = TestPrivateClass()
+test.button
+test.setup()
+
+
+
+test.button.accessibilityIdentifier
+

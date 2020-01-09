@@ -189,3 +189,27 @@ struct Terry: Decodable {
 let terry = try! JSONDecoder().decode(Terry.self, from: dpPayload)
 
 terry.withdrawal
+
+
+
+
+let jsonb = """
+{
+
+    "additional" : 5
+    "ManuFacturer" : "Cessna",
+    "model" : "172 Skyawk",
+    "seats" : 4,
+}
+"""//.data(using: .utf8)!
+
+let jsona = """
+{
+    "additional" : 5
+    "ManuFacturer" : "Cessna",
+    "model" : "172 Skyawk",
+    "seats" : 4,
+}
+"""//.data(using: .utf8)!
+
+jsonb.hashValue == jsona.hashValue
