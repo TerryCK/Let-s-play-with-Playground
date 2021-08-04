@@ -1,5 +1,9 @@
 # iOS 面試問題練習：
-整理者約有一年左右Swift的程式開發經驗
+整理者從2016開始專注在Swift的iOS App開發，在App Store上架的App有相當亮眼的表現包含有 
+
+[Go - 電池站 串連換電站路徑規劃](https://apple.co/2kb6u3a)
+
+[垃圾車 - 動態追蹤](https://apple.co/2FLyTXX)
 
 ## Outline
 
@@ -34,7 +38,7 @@
     2. UI Graphic capture  —  抓UI圖層上的Bug
     3. Break point搭配lldb(抓執行序與參數)
 * 你在你的項目中用到了哪些設計模式？
-    * singleton, delegation, MVC, Factory, Observe, strategy
+    * Singleton, Delegation, MVC, MVVM, Reactive(Combine), Declarative(SwiftUI) , Factory, Observe, Strategy
 * 如何實現單例，單例會有什麼弊端？
     * 宣告及調用方式：
     * !["Singleton"](/screenshots/Singleton.png)
@@ -85,18 +89,26 @@
         
 	 
 ## iOS 是如何管理記憶體的？
-* 關於 Value & Reference types 
+
+* Swift 記憶體管理的本質是： ` 如果對象被強引用，Swift 保留該物件，否則釋放該物件。剩下的只是一個實現細節。 `
+
+* 關於 Value & Reference semantics 
 
 	| Types | Keywords | Memory structure | Performance |
     | ------ | ------ | ------ | ------ |
-	| Reference | class, closure | Heap(ARC) | Bad  |
-	| Value | struct, enum | Stack | Good |
+	| Reference | class, closure | Heap(ARC) | Low  |
+	| Value | struct, enum | Stack | High |
 	
-	* 效能上 value type 優於 Reference type
-	* reference type: 記憶體管理方式— Heap, ARC
-		* class, closure
-    	* 當class/ closure被持有時Automatic Retain Counter即會+1，若使用weak 或 unowned 做前綴修飾，則Automatic retain counter 不會+1
-    	* weak與unowned差別： weak: Optional, unowned: non-Optional, 使用時機: unowned 使用在 引用對象生命週期 > 被引用對象的生命週期 
+	* 效能上 value semantics 優於 Reference semantics (stack vs heap)
+* reference semantics: 記憶體管理方式— Heap, ARC(Automatic Retain Counter)
+	* class, closure, actor (Swift 5.5新增)
+	* strong, unowned 會指向 Object address, weak則會指向 Side Table
+	*  主要由 3個 count組成 包含 strong, unowned, weak counts.
+	*  當object被創立時 初始值皆為 1, 當值到達 0 時 則會立即釋放該物件與記憶體資源。
+    * 當class/ closure被持有時ARC即會+1，若使用weak 或 unowned 做前綴修飾，則 strong count 不會+1
+    	* weak與unowned差別： 
+    		* 	weak: Optional, side table
+    		*  unowned: non-Optional, 使用時機: unowned 使用在 引用對象生命週期 > 被引用對象的生命週期 
         * 關於 strong/weak 為兩個不同的retain count:
         	* 有兩物件互相引用，A物件使用strong count, B物件使用weak count當strong count為0且weak count不為零時，B物件會與A物件同時被系統回收(deinitialize)，而回收時間點再runloop訪問完AB物件後進行回收，當尚未訪問B物件時，weak物件仍佔據記憶體資源造成冗餘的浪費。
         	* Swift 4中，介紹了`side tables`的新概念，`side tables`是個可選值(optional)，用來儲存`object`的額外資訊，新的`object`可以有或沒有`side tables`，如果`object`不需要`side tables`就不需要浪費記憶體。[參考連結](https://goo.gl/UcQj3X)。
@@ -104,19 +116,25 @@
         * 兩個class / closure互為持有時，會有retain cycle發生，即為Memory leak，當memory使用達上限前，會先觸發memory warning依照使用者設計記憶體釋放流程釋放，若記憶體不足，則會造成app的Crash，記憶體崩潰點依裝置不同而有差異：[ios app maximum memory budget
 ](https://goo.gl/g4vHXQ)
 
-    * value type: 記憶體管理方式 — Stack
+    * value semantics: 記憶體管理方式 — Stack
         * struct, enum
-	
 
+Credits:
 
-## iOS的多執行序(Multiple-threads, GCD)
+ [RefCount.h](https://github.com/apple/swift/blob/d1c87f3c936c41418ee93320e42d523b3f51b6df/stdlib/public/SwiftShims/RefCount.h#L44)
+ 
+ [Core Concepts of Swift Reference Management](https://maximeremenko.com/swift-arc-weak-references)
+ 
+ [Advanced iOS Memory Management with Swift: ARC, Strong, Weak and Unowned Explained](https://www.vadimbulavin.com/swift-memory-management-arc-strong-weak-and-unowned/)
+
+## iOS的多執行序(Multithreading, GCD)
 * 對於多執序有什麼看法？
     * `NSOperations`是一種類的封裝
     * pthread
     * Grand Central Dispatch(GCD) —  基礎是C語言的API 
     * 更新UI相關任務只可以在main queue裡執行
     * Main Queue屬(Serial, async)
-    * 
+    
     | Queue name | How to call | Queue type | Thread type |
     | ------ | ------ | ------ | ------ | 
     | Main queue | DispatchQueue.main | Serial | main-thread  |
