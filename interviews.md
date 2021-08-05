@@ -91,7 +91,14 @@
 ## iOS 是如何管理記憶體的？
 
 * Swift 記憶體管理的本質是： ` 如果對象被強引用，Swift 保留該物件，否則釋放該物件。剩下的只是一個實現細節。 `
-
+  What is memory?
+    The memory in hardware level is a array of the MOSFET with a capacity to achieve R/W controlling and store charge which is represented a bit of data.
+    we treat it as if it were organized into three parts
+    
+    1. Stack, where all local variables
+    2. Global data, where
+    3. Heap, those are objects have life time
+    
 * 關於 Value & Reference semantics 
 
 	| Types | Keywords | Memory structure | Performance |
@@ -129,6 +136,7 @@ Credits:
 
 ## iOS的多執行序(Multithreading, GCD)
 * 對於多執序有什麼看法？
+    *   
     * `NSOperations`是一種類的封裝
     * pthread
     * Grand Central Dispatch(GCD) —  基礎是C語言的API 
