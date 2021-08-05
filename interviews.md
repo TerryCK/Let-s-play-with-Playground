@@ -91,6 +91,7 @@
 ## iOS 是如何管理記憶體的？
 
 * Swift 記憶體管理的本質是： ` 如果對象被強引用，Swift 保留該物件，否則釋放該物件。剩下的只是一個實現細節。 `
+
   What is memory?
     The memory in hardware level is a array of the MOSFET with a capacity to achieve R/W controlling and store charge which is represented a bit of data.
     we treat it as if it were organized into three parts
