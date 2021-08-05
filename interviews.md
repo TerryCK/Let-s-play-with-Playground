@@ -137,7 +137,7 @@ Credits:
 
 ## iOS的多執行序(Multithreading, GCD)
 * 對於多執序有什麼看法？
-    *   
+    *  A race condition is what happens when the expected completion order of a sequence of operations becomes unpredictable, causing our program logic to end up in an undefined state
     * `NSOperations`是一種類的封裝
     * pthread
     * Grand Central Dispatch(GCD) —  基礎是C語言的API 
